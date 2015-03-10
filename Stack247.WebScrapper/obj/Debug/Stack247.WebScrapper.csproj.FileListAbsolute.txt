@@ -1,0 +1,7 @@
+C:\Semplice\Projects\Stack247.WebScrapper\Stack247.WebScrapper\bin\Debug\Stack247.WebScrapper.dll
+C:\Semplice\Projects\Stack247.WebScrapper\Stack247.WebScrapper\bin\Debug\Stack247.WebScrapper.pdb
+C:\Semplice\Projects\Stack247.WebScrapper\Stack247.WebScrapper\bin\Debug\CsQuery.dll
+C:\Semplice\Projects\Stack247.WebScrapper\Stack247.WebScrapper\bin\Debug\CsQuery.xml
+C:\Semplice\Projects\Stack247.WebScrapper\Stack247.WebScrapper\obj\Debug\Stack247.WebScrapper.dll
+C:\Semplice\Projects\Stack247.WebScrapper\Stack247.WebScrapper\obj\Debug\Stack247.WebScrapper.pdb
+C:\Semplice\Projects\Stack247.WebScrapper\Stack247.WebScrapper\obj\Debug\Stack247.WebScrapper.csprojResolveAssemblyReference.cache
