@@ -135,7 +135,7 @@ namespace Stack247.WebScrapper.Helpers
             return null;
         }
 
-        public static string GetValueFromDom(string dom, string selector, string getValueMethod)
+        public static string GetValueFromDom(string dom, string selector, GetValueMethods getValueMethod)
         {
             // TODO: 7.29.2014 - Write reusable code for this method and GetValuesFromDom
 
@@ -152,11 +152,15 @@ namespace Stack247.WebScrapper.Helpers
                 _result = _element.Html();
             else if (getValueMethod == GetValueMethods.Text)
                 _result = _element.Text();
+            else if (getValueMethod == GetValueMethods.AttributeHref)
+                _result = _element.Attr("href");
+            else if (getValueMethod == GetValueMethods.AttributeSrc)
+                _result = _element.Attr("src");
 
             return _result.Trim();
         }
 
-        public static ICollection<string> GetValuesFromDom(string dom, string selector, string getValueMethod)
+        public static ICollection<string> GetValuesFromDom(string dom, string selector, GetValueMethods getValueMethod)
         {
             // TODO: 7.29.2014 - Write reusable code for this method and GetValueFromDom
 
