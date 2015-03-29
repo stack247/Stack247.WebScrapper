@@ -1,6 +1,7 @@
 using Stack247.WebScrapper.Constants;
 using Stack247.WebScrapper.Contracts;
 using System.Collections.Generic;
+
 namespace Stack247.WebScrapper.Scrapper
 {
     public class ElementTarget : ITarget
