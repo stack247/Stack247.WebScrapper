@@ -179,6 +179,10 @@ namespace Stack247.WebScrapper.Helpers
                     _result.Add(_element.InnerHTML.Trim());
                 else if (getValueMethod == GetValueMethods.Text)
                     _result.Add(_element.InnerText.Trim());
+                else if (getValueMethod == GetValueMethods.AttributeHref)
+                    _result.Add(_element.GetAttribute("href"));
+                else if (getValueMethod == GetValueMethods.AttributeSrc)
+                    _result.Add(_element.GetAttribute("src"));
             }
 
             return _result;

@@ -66,7 +66,7 @@ namespace Stack247.WebScrapper.Scrapper
                     foreach (var _target in request.Targets)
                     {
                         // Parse out DOM to get value based on given selector
-                        var _columnValue = Html.GetValueFromDom(_dom, _target.Selector, _target.GetValueMethod);
+                        var _columnValue = Html.GetValuesFromDom(_dom, _target.Selector, _target.GetValueMethod);
 
                         _target.Value = _columnValue;
                     }
