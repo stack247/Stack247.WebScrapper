@@ -94,7 +94,20 @@ namespace Stack247.WebScrapper.Helpers
 
         public static HttpWebResponse GetResponseFromUrl(string url, Cookie cookie, CookieCollection cookies, Dictionary<HttpRequestHeader, string> headers)
         {
+            return RequestResponseFromUrl(url, null, cookie, cookies, headers, null);
+        }
+
+        public static HttpWebResponse PostResponseFromUrl(string url, Cookie cookie, CookieCollection cookies, Dictionary<HttpRequestHeader, string> headers, string body)
+        {
+            return RequestResponseFromUrl(url, WebRequestMethods.Http.Post, cookie, cookies, headers, body);
+        }
+
+        public static HttpWebResponse RequestResponseFromUrl(string url, string method, Cookie cookie, CookieCollection cookies, Dictionary<HttpRequestHeader, string> headers, string body)
+        {
             var _request = (HttpWebRequest)WebRequest.Create(url);
+
+            if (method != null)
+                _request.Method = method;
 
             if (cookie != null)
             {
@@ -118,8 +131,22 @@ namespace Stack247.WebScrapper.Helpers
                 {
                     if (_header.Key == HttpRequestHeader.UserAgent)
                         _request.UserAgent = _header.Value;
-                    else if (_header.Key == HttpRequestHeader.Authorization)
+                    else if (_header.Key == HttpRequestHeader.ContentType)
+                        _request.ContentType = _header.Value;
+                    else if (_header.Key == HttpRequestHeader.Referer)
+                        _request.Referer = _header.Value;
+                    else
                         _request.Headers.Add(_header.Key, _header.Value);
+                }
+            }
+
+            if (body != null)
+            {
+                var _bodyData = Encoding.UTF8.GetBytes(body);
+                using (var _stream = _request.GetRequestStream())
+                {
+                    _stream.Write(_bodyData, 0, _bodyData.Length);
+                    _stream.Close();
                 }
             }
 
