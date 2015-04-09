@@ -54,10 +54,10 @@ namespace Stack247.WebScrapper.Scrapper
                     #region Perform WebRequest
 
                     // Perform WebRequest
-                    var _domResponse = Html.GetResponseFromUrl(request.Url, Headers);
+                    var _domResponse = Http.GetResponseFromUrl(request.Url, Headers);
 
                     // Get DOM string from response object
-                    var _dom = Html.GetStringFromWebResponse(_domResponse);
+                    var _dom = Http.GetStringFromWebResponse(_domResponse);
 
                     #endregion
 
@@ -67,7 +67,7 @@ namespace Stack247.WebScrapper.Scrapper
                     foreach (var _target in request.Targets)
                     {
                         // Get all rows of data in a table inside the target
-                        var _rowsDom = Html.GetValuesFromDom(_dom, _target.RowsSelector, GetValueMethods.Html);
+                        var _rowsDom = Http.GetValuesFromDom(_dom, _target.RowsSelector, GetValueMethods.Html);
 
                         // Loop through all rows in a table
                         foreach (var _rowDom in _rowsDom)
@@ -77,7 +77,7 @@ namespace Stack247.WebScrapper.Scrapper
                             foreach (var _schema in _target.Schema)
                             {
                                 // Parse out DOM to get value based on given selector
-                                var _columnValue = Html.GetValueFromDom(_rowDom, _schema.Selector, _schema.GetValueMethod);
+                                var _columnValue = Http.GetValueFromDom(_rowDom, _schema.Selector, _schema.GetValueMethod);
 
                                 _row.Columns.Add(new TableTarget.Column
                                 {

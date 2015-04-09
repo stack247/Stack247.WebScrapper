@@ -53,10 +53,10 @@ namespace Stack247.WebScrapper.Scrapper
                     #region Perform WebRequest
 
                     // Perform WebRequest
-                    var _domResponse = Html.GetResponseFromUrl(request.Url, Headers);
+                    var _domResponse = Http.GetResponseFromUrl(request.Url, Headers);
 
                     // Get DOM string from response object
-                    var _dom = Html.GetStringFromWebResponse(_domResponse);
+                    var _dom = Http.GetStringFromWebResponse(_domResponse);
 
                     #endregion
 
@@ -66,7 +66,7 @@ namespace Stack247.WebScrapper.Scrapper
                     foreach (var _target in request.Targets)
                     {
                         // Parse out DOM to get value based on given selector
-                        var _columnValue = Html.GetValuesFromDom(_dom, _target.Selector, _target.GetValueMethod);
+                        var _columnValue = Http.GetValuesFromDom(_dom, _target.Selector, _target.GetValueMethod);
 
                         _target.Value = _columnValue;
                     }

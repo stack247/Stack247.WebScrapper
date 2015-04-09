@@ -11,7 +11,7 @@ using CsQuery;
 
 namespace Stack247.WebScrapper.Helpers
 {
-    public class Html
+    public class Http
     {
         public static string GetStringFromUrl(string url)
         {

@@ -54,10 +54,10 @@ namespace Stack247.WebScrapper.Scrapper
                     #region Perform WebRequest
 
                     // Perform WebRequest
-                    var _domResponse = Html.GetResponseFromUrl(request.Url, Headers);
+                    var _domResponse = Http.GetResponseFromUrl(request.Url, Headers);
 
                     // Get DOM string from response object
-                    var _dom = Html.GetStringFromWebResponse(_domResponse);
+                    var _dom = Http.GetStringFromWebResponse(_domResponse);
 
                     #endregion
 
