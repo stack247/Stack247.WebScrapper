@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Stack247.WebScrapper.Tests.Helpers
 {
-    public class HtmlTests
+    public class HttpTests
     {
     }
 }
