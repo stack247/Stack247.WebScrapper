@@ -18,22 +18,20 @@ namespace Stack247.WebScrapper.Scrapper
         //public bool ClearCacheWhenFinish { get; set; }
 
         public Scrapper(ICollection<Request<T>> requests = null,
-            Dictionary<HttpRequestHeader, string> headers = null,
             bool verbose = false)
         {
             Scrap = new S
             {
                 Requests = requests,
-                Headers = headers,
                 Verbose = verbose
             };
             //Cache = cache;
             //ClearCacheWhenFinish = clearCacheWhenFinish;
         }
 
-        public ICollection<Response<T>> Process()
+        public ICollection<Response<T>> Process(string htmlDom)
         {
-            return Scrap.Requests != null ? Scrap.Process() : null;
+            return Scrap.Requests != null ? Scrap.Process(htmlDom) : null;
         }
     }
 

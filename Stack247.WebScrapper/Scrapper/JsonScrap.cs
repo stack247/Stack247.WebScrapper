@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Script.Serialization;
-using Stack247.WebScrapper.Helpers;
 using Stack247.WebScrapper.Contracts;
 
 namespace Stack247.WebScrapper.Scrapper
@@ -10,18 +9,19 @@ namespace Stack247.WebScrapper.Scrapper
     // Strategy concrete class
     public class JsonScrap<T> : BaseScrap<JsonTarget<T>>
     {
-        public override ICollection<Response<JsonTarget<T>>> Process()
+        public override ICollection<Response<JsonTarget<T>>> Process(string htmlDom)
         {
             var _return = new List<Response<JsonTarget<T>>>();
 
             foreach (var _request in Requests)
-                _return.Add(Process(_request));
+                _return.Add(Process(_request, htmlDom));
 
             return _return;
         }
 
         // TODO: 7.29.2014 - Remove dependency on Log class.
-        private Response<JsonTarget<T>> Process(Request<JsonTarget<T>> request)
+        // TODO: 4.10.2015 - Remove dependency on Http helper class.
+        private Response<JsonTarget<T>> Process(Request<JsonTarget<T>> request, string htmlDom)
         {
             var _return = new Response<JsonTarget<T>>();
 
@@ -30,7 +30,6 @@ namespace Stack247.WebScrapper.Scrapper
                 Console.WriteLine("Start Scrapping Process");
                 Console.WriteLine("Settings:");
                 Console.WriteLine(string.Empty.PadRight(4) + "Type: Json");
-                Console.WriteLine(string.Empty.PadRight(4) + "Headers: " + Headers.Values.FirstOrDefault());
                 Console.WriteLine(string.Empty.PadRight(4) + "Verbose: " + Verbose);
                 Console.WriteLine(string.Empty.PadRight(4) + "Requests Count: " + Requests.Count);
             }
@@ -38,7 +37,6 @@ namespace Stack247.WebScrapper.Scrapper
             //Log.Debug("Start Scrapping Process");
             //Log.Debug("Settings:");
             //Log.Debug(string.Empty.PadRight(4) + "Type: Json");
-            //Log.Debug(string.Empty.PadRight(4) + "Headers: " + Headers);
             //Log.Debug(string.Empty.PadRight(4) + "Verbose: " + Verbose);
             //Log.Debug(string.Empty.PadRight(4) + "Requests Count: " + Requests.Count);
 
@@ -51,22 +49,12 @@ namespace Stack247.WebScrapper.Scrapper
 
                 try
                 {
-                    #region Perform WebRequest
-
-                    // Perform WebRequest
-                    var _domResponse = Http.GetResponseFromUrl(request.Url, Headers);
-
-                    // Get DOM string from response object
-                    var _dom = Http.GetStringFromWebResponse(_domResponse);
-
-                    #endregion
-
                     #region Process Response
 
                     foreach (var _target in request.Targets)
                     {
                         // Loop through all requested scrap in a target URL. One Url can have multiple Targets.
-                        _target.Result = new JavaScriptSerializer().Deserialize<List<T>>(_dom);
+                        _target.Result = new JavaScriptSerializer().Deserialize<List<T>>(htmlDom);
                     }
 
                     _return.Targets = request.Targets;

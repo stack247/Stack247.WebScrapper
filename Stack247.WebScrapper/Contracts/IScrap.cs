@@ -5,6 +5,6 @@ namespace Stack247.WebScrapper.Contracts
     // Strategy interface
     public interface IScrap<T> where T : ITarget
     {
-        ICollection<Response<T>> Process();
+        ICollection<Response<T>> Process(string htmlDom);
     }
 }

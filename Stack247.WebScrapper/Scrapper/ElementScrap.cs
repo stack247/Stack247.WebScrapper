@@ -9,18 +9,19 @@ namespace Stack247.WebScrapper.Scrapper
     // Strategy concrete class
     public class ElementScrap : BaseScrap<ElementTarget>
     {
-        public override ICollection<Response<ElementTarget>> Process()
+        public override ICollection<Response<ElementTarget>> Process(string htmlDom)
         {
             var _return = new List<Response<ElementTarget>>();
 
             foreach (var _request in Requests)
-                _return.Add(Process(_request));
+                _return.Add(Process(_request, htmlDom));
 
             return _return;
         }
 
         // TODO: 7.29.2014 - Remove dependency on Log class.
-        private Response<ElementTarget> Process(Request<ElementTarget> request)
+        // TODO: 4.10.2015 - Remove dependency on Http helper class.
+        private Response<ElementTarget> Process(Request<ElementTarget> request, string htmlDom)
         {
             var _return = new Response<ElementTarget>();
 
@@ -29,7 +30,6 @@ namespace Stack247.WebScrapper.Scrapper
                 Console.WriteLine("Start Scrapping Process");
                 Console.WriteLine("Settings:");
                 Console.WriteLine(string.Empty.PadRight(4) + "Type: Table");
-                Console.WriteLine(string.Empty.PadRight(4) + "Headers: " + Headers.Values.FirstOrDefault());
                 Console.WriteLine(string.Empty.PadRight(4) + "Verbose: " + Verbose);
                 Console.WriteLine(string.Empty.PadRight(4) + "Requests Count: " + Requests.Count);
             }
@@ -37,7 +37,6 @@ namespace Stack247.WebScrapper.Scrapper
             //Log.Debug("Start Scrapping Process");
             //Log.Debug("Settings:");
             //Log.Debug(string.Empty.PadRight(4) + "Type: Table");
-            //Log.Debug(string.Empty.PadRight(4) + "Headers: " + Headers);
             //Log.Debug(string.Empty.PadRight(4) + "Verbose: " + Verbose);
             //Log.Debug(string.Empty.PadRight(4) + "Requests Count: " + Requests.Count);
 
@@ -50,23 +49,13 @@ namespace Stack247.WebScrapper.Scrapper
 
                 try
                 {
-                    #region Perform WebRequest
-
-                    // Perform WebRequest
-                    var _domResponse = Http.GetResponseFromUrl(request.Url, Headers);
-
-                    // Get DOM string from response object
-                    var _dom = Http.GetStringFromWebResponse(_domResponse);
-
-                    #endregion
-
                     #region Process Response
 
                     // Loop through all requested scrap in a target URL. One Url can have multiple Targets.
                     foreach (var _target in request.Targets)
                     {
                         // Parse out DOM to get value based on given selector
-                        var _columnValue = Http.GetValuesFromDom(_dom, _target.Selector, _target.GetValueMethod);
+                        var _columnValue = Http.GetValuesFromDom(htmlDom, _target.Selector, _target.GetValueMethod);
 
                         _target.Value = _columnValue;
                     }
