@@ -9,6 +9,7 @@ namespace Stack247.WebScrapper.Contracts
         public int Id { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
+        public RequestMethod Method { get; set; }
         public RequestType Type { get; set; }
         public IList<T> Targets { get; set; }
     }

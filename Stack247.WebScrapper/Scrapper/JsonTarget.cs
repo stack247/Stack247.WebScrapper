@@ -9,6 +9,6 @@ namespace Stack247.WebScrapper.Scrapper
         // Scrap request with JsonTarget will always have one target.
         // This is because the response will return the final result and we don't need selector to get the values.
 
-        public ICollection<T> Result { get; set; }
+        public T Result { get; set; }
     }
 }

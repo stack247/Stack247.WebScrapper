@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Script.Serialization;
 using Stack247.WebScrapper.Contracts;
+using Newtonsoft.Json;
 
 namespace Stack247.WebScrapper.Scrapper
 {
@@ -54,7 +55,7 @@ namespace Stack247.WebScrapper.Scrapper
                     foreach (var _target in request.Targets)
                     {
                         // Loop through all requested scrap in a target URL. One Url can have multiple Targets.
-                        _target.Result = new JavaScriptSerializer().Deserialize<List<T>>(htmlDom);
+                        _target.Result = JsonConvert.DeserializeObject<T>(htmlDom);
                     }
 
                     _return.Targets = request.Targets;
