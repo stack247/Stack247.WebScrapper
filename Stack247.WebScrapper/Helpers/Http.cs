@@ -97,6 +97,11 @@ namespace Stack247.WebScrapper.Helpers
             return RequestResponseFromUrl(url, null, cookie, cookies, headers, null);
         }
 
+        public static HttpWebResponse PostResponseFromUrl(string url, Dictionary<HttpRequestHeader, string> headers)
+        {
+            return PostResponseFromUrl(url, null, null, headers, null);
+        }
+
         public static HttpWebResponse PostResponseFromUrl(string url, Dictionary<HttpRequestHeader, string> headers, string body)
         {
             return PostResponseFromUrl(url, null, null, headers, body);
@@ -139,6 +144,10 @@ namespace Stack247.WebScrapper.Helpers
                     else if (_header.Key == HttpRequestHeader.ContentType)
                         _request.ContentType = _header.Value;
                     else if (_header.Key == HttpRequestHeader.Referer)
+                        _request.Referer = _header.Value;
+                    else if (_header.Key == HttpRequestHeader.ContentLength)
+                        _request.Referer = _header.Value;
+                    else if (_header.Key == HttpRequestHeader.Host)
                         _request.Referer = _header.Value;
                     else
                         _request.Headers.Add(_header.Key, _header.Value);
