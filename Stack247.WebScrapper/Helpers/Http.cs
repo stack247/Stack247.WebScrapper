@@ -184,7 +184,11 @@ namespace Stack247.WebScrapper.Helpers
             // https://github.com/jamietre/CsQuery
 
             CQ _dom = dom;
-            var _element = _dom[selector];
+            CQ _element;
+            if (!string.IsNullOrEmpty(selector))
+                _element = _dom[selector];
+            else
+                _element = _dom;
 
             var _result = string.Empty;
 
@@ -209,7 +213,11 @@ namespace Stack247.WebScrapper.Helpers
             // https://github.com/jamietre/CsQuery
 
             CQ _dom = dom;
-            var _elements = _dom[selector];
+            CQ _elements;
+            if (!string.IsNullOrEmpty(selector))
+                _elements = _dom[selector];
+            else
+                _elements = _dom;
 
             var _result = new List<string>();
 
