@@ -151,6 +151,8 @@ namespace Stack247.WebScrapper.Helpers
                 {
                     if (_header.Key == HttpRequestHeader.UserAgent)
                         _request.UserAgent = _header.Value;
+                    else if (_header.Key == HttpRequestHeader.Accept)
+                        _request.Accept = _header.Value;
                     else if (_header.Key == HttpRequestHeader.ContentType)
                         _request.ContentType = _header.Value;
                     else if (_header.Key == HttpRequestHeader.Referer)
