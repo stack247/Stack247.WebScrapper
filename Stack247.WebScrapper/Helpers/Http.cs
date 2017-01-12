@@ -107,6 +107,16 @@ namespace Stack247.WebScrapper.Helpers
             return PostResponseFromUrl(url, null, null, headers, body);
         }
 
+        public static HttpWebResponse PostResponseFromUrl(string url, Cookie cookie, Dictionary<HttpRequestHeader, string> headers, string body)
+        {
+            return PostResponseFromUrl(url, cookie, null, headers, body);
+        }
+
+        public static HttpWebResponse PostResponseFromUrl(string url, CookieCollection cookies, Dictionary<HttpRequestHeader, string> headers, string body)
+        {
+            return PostResponseFromUrl(url, null, cookies, headers, body);
+        }
+
         public static HttpWebResponse PostResponseFromUrl(string url, Cookie cookie, CookieCollection cookies, Dictionary<HttpRequestHeader, string> headers, string body)
         {
             return RequestResponseFromUrl(url, WebRequestMethods.Http.Post, cookie, cookies, headers, body);
